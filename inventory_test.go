@@ -74,11 +74,11 @@ func TestPlaceItem(t *testing.T) {
 			}
 			for i, cell := range tt.inventory.Cells {
 				if cell != tt.expectedCells[i] {
-					t.Errorf("expected cell %v, got %v", tt.expectedCells[i], cell)
+					t.Errorf("expected cell %+v, got %+v", tt.expectedCells[i], cell)
 				}
 			}
 			if tt.inventory.Hand != tt.expectedHand {
-				t.Errorf("expected hand %v, got %v", tt.expectedHand, tt.inventory.Hand)
+				t.Errorf("expected hand %+v, got %+v", tt.expectedHand, tt.inventory.Hand)
 			}
 		})
 	}

@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-const EmptyCell = -1
+const EmptyCell = 0
 
 type Cell struct {
 	ItemId int
