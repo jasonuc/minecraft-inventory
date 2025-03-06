@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+)
 
 const EmptyCell = -1
 
@@ -49,8 +52,8 @@ func (i *Inventory) placeItem(index int) bool {
 	}
 }
 
-func (i *Inventory) PrintIventory() {
+func (i *Inventory) PrintIventory(out io.Writer) {
 	for _, cell := range i.Cells {
-		fmt.Printf("cell: %d, %d\n", cell.ItemId, cell.Amount)
+		fmt.Fprintf(out, "cell: %d, %d\n", cell.ItemId, cell.Amount)
 	}
 }
