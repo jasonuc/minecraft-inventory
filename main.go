@@ -1,16 +1,23 @@
 package main
 
 import (
+	"image/color"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
-type Game struct{}
+type Game struct {
+	Inventory Inventory
+}
 
 func NewGame() *Game {
-	return &Game{}
+	return &Game{
+		Inventory: Inventory{
+			Cells: make([]Cell, 27),
+		},
+	}
 }
 
 func (g *Game) Update() error {
@@ -20,7 +27,10 @@ func (g *Game) Update() error {
 	return nil
 }
 
-func (g *Game) Draw(screen *ebiten.Image) {}
+func (g *Game) Draw(screen *ebiten.Image) {
+	screen.Fill(color.RGBA{120, 180, 255, 255})
+	g.Inventory.Draw(screen)
+}
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
 	return outsideWidth, outsideHeight

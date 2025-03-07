@@ -2,7 +2,11 @@ package main
 
 import (
 	"fmt"
+	"image/color"
 	"io"
+
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
 const EmptyCell = 0
@@ -20,6 +24,29 @@ type Inventory struct {
 func resetCell(cell *Cell) {
 	cell.ItemId = EmptyCell
 	cell.Amount = 0
+}
+
+func (i *Inventory) Draw(screen *ebiten.Image) {
+	rowSize := 9
+	cellSize := 32
+	gapSize := 2
+
+	for idx, _ := range i.Cells {
+		gridX := idx % rowSize
+		gridY := idx / rowSize
+		pixelX := gridX * (cellSize + gapSize)
+		pixelY := gridY * (cellSize + gapSize)
+
+		vector.DrawFilledRect(
+			screen,
+			float32(pixelX),
+			float32(pixelY),
+			float32(cellSize),
+			float32(cellSize),
+			color.RGBA{20, 20, 20, 255},
+			true)
+	}
+
 }
 
 func (i *Inventory) placeItem(index int) bool {
